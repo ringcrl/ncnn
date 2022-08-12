@@ -9,6 +9,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm> // std::max
+#include <chrono>
 
 // ====================== Config ========================
 
@@ -672,6 +673,8 @@ int main(int args, char** argv)
     _extractor.set_num_threads(4);
     _extractor.input("data", input); // 可以从.param查看网络结构,查看输入名称
 
+
+
     std::vector<AnchorGenerator> ac(
         _feat_stride_fpn.size()); // _feat_stride_fpn = {32, 16, 8}  .size=3
     for (int i = 0; i < _feat_stride_fpn.size(); ++i)
@@ -711,6 +714,9 @@ int main(int args, char** argv)
     printf("final result %lld\n", result.size()); //人脸个数
     // result = choose_one(result);
 
+    std::chrono::milliseconds start_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::system_clock::now().time_since_epoch());
+
     std::vector<std::vector<cv::Point> > all_points;
     for (int i = 0; i < result.size(); i++) //遍历人脸
     {
@@ -748,8 +754,16 @@ int main(int args, char** argv)
         all_points.push_back(outpoint);
     }
 
+    std::chrono::milliseconds end_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::system_clock::now().time_since_epoch());
+    std::cout << "耗时:"
+              << std::chrono::milliseconds(end_time).count() - std::chrono::milliseconds(start_time).count()
+              << " ms" << std::endl;
+
     std::cout << "人脸数" << all_points.size() << std::endl;
     std::cout << "单人脸点数" << all_points[0].size() << std::endl;
+
+
 
     draw_points(img_c, all_points); //绘制 关键点
 
