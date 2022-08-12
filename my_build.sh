@@ -10,9 +10,3 @@ cmake -DCMAKE_OSX_ARCHITECTURES="arm64" \
 
 cmake --build . -j 16
 cmake --build . --target install
-
-rm -rf ../.test/face_landmark 
-cp -r ./examples/face_landmark ../.test/face_landmark 
-
-cd ../.test/
-./face_landmark
