@@ -56,3 +56,6 @@ python/setup.py
 
 # Clangd
 .cache/
+vulkansdk-macos-*
+.test/*
+!.test/.gitkeep
