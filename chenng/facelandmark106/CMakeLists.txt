@@ -4,7 +4,7 @@ project(face_landmark VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-set(ncnn_DIR /Users/ringcrl/Documents/github/ncnn/build/install/lib/cmake/ncnn)
+set(ncnn_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../build/install/lib/cmake/ncnn)
 
 find_package(ncnn REQUIRED)
 find_package(OpenCV REQUIRED)

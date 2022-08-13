@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(nanodet_demo)
 
-set(ncnn_DIR /Users/ringcrl/Documents/github/ncnn/build/install/lib/cmake/ncnn)
+set(ncnn_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../build/install/lib/cmake/ncnn)
 
 find_package(OpenMP REQUIRED)
 if(OPENMP_FOUND)
