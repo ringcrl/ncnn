@@ -1,0 +1,14 @@
+{
+  "name": "nanodet-webassembly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wasmFeatureDetect.js",
+  "scripts": {
+    "dev": "serve ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.0.1"
+  }
+}

@@ -1,0 +1,11 @@
+# IDE
+.vscode
+
+# CMake build directory
+build/
+
+# files
+deploy/
+model/
+ncnn-*-webassembly
+node_modules
