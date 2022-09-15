@@ -7,5 +7,5 @@ build/
 # files
 deploy/
 model/
-ncnn-*-webassembly
+# ncnn-*-webassembly
 node_modules

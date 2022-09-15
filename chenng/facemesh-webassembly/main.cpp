@@ -463,8 +463,47 @@ void landmark(cv::Mat& bgr, const ncnn::Net& net, const FaceObject& obj,
     }
 }
 
+void landmark_iris(cv::Mat& bgr, const ncnn::Net& net, const FaceObject& obj,
+              std::vector<cv::Point2f>& landmarks)
+{
+    int pad = obj.rect.height;
+    cv::Rect box;
+
+    box.x = (obj.rect.x + obj.rect.width / 2) - pad * pad_ratio;
+    box.y = obj.rect.y;
+    box.width = obj.rect.height;
+    box.height = obj.rect.height;
+
+    box.x = std::max(0.f, (float)box.x);
+    box.y = std::max(0.f, (float)box.y);
+    box.width = box.x + box.width < bgr.cols ? box.width : bgr.cols - box.x - 1;
+    box.height = box.y + box.height < bgr.rows ? box.height : bgr.rows - box.y - 1;
+
+    cv::Mat faceRoiImage = bgr(box).clone();
+
+    ncnn::Extractor ex_face = net.create_extractor();
+    ncnn::Mat ncnn_in = ncnn::Mat::from_pixels_resize(
+        faceRoiImage.data, ncnn::Mat::PIXEL_RGBA2BGR, faceRoiImage.cols,
+        faceRoiImage.rows, 192, 192);
+    const float means[3] = {127.5f, 127.5f, 127.5f};
+    const float norms[3] = {1 / 127.5f, 1 / 127.5f, 1 / 127.5f};
+    ncnn_in.substract_mean_normalize(means, norms);
+    ex_face.input("input.1", ncnn_in);
+    ncnn::Mat ncnn_out;
+    ex_face.extract("482", ncnn_out);
+    float* scoredata = (float*)ncnn_out.data;
+    for (int i = 0; i < 10; i++)
+    {
+        cv::Point2f pt;
+        pt.x = scoredata[i * 3] * box.width / 192 + box.x;
+        pt.y = scoredata[i * 3 + 1] * box.width / 192 + box.y;
+        landmarks.push_back(pt);
+    }
+}
+
 static ncnn::Net* g_face_detector = 0;
 static ncnn::Net* g_face_mesh = 0;
+static ncnn::Net* g_face_mesh_iris = 0;
 
 static void on_image_render(cv::Mat& rgba)
 {
@@ -482,6 +521,13 @@ static void on_image_render(cv::Mat& rgba)
         g_face_mesh->load_model("facemesh.bin");
     }
 
+    if (!g_face_mesh_iris)
+    {
+        g_face_mesh_iris = new ncnn::Net;
+        g_face_mesh_iris->load_param("iris_landmark-opt.param");
+        g_face_mesh_iris->load_model("iris_landmark-opt.bin");
+    }
+
     std::vector<FaceObject> faceObjects;
     detect(rgba, *g_face_detector, faceObjects);
 
@@ -496,8 +542,11 @@ static void on_image_render(cv::Mat& rgba)
     {
         std::vector<cv::Point2f> pts;
         const FaceObject& obj = faceObjects[i];
-
         landmark(rgba, *g_face_mesh, obj, pts);
+
+
+        std::vector<cv::Point2f> pts2;
+        landmark_iris(rgba,  *g_face_mesh_iris, obj, pts2);
 
         // draw
         for (int i = 0; i < pts.size(); i++) {

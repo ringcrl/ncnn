@@ -1,0 +1,198 @@
+7767517
+196 223
+Input                    input_1                  0 1 input_1
+Permute                  conv2d__90               1 1 input_1 conv2d__90:0 0=4
+Convolution              conv2d                   1 1 conv2d__90:0 conv2d 0=64 1=3 3=2 15=1 16=1 5=1 6=1728
+PReLU                    p_re_lu                  1 1 conv2d p_re_lu 0=64
+Split                    splitncnn_0              1 2 p_re_lu p_re_lu_splitncnn_0 p_re_lu_splitncnn_1
+Convolution              conv2d_1                 1 1 p_re_lu_splitncnn_1 conv2d_1 0=32 1=1 5=1 6=2048
+PReLU                    p_re_lu_1                1 1 conv2d_1 p_re_lu_1 0=32
+ConvolutionDepthWise     depthwise_conv2d         1 1 p_re_lu_1 depthwise_conv2d 0=32 1=3 4=1 5=1 6=288 7=32
+Convolution              conv2d_2                 1 1 depthwise_conv2d conv2d_2 0=64 1=1 5=1 6=2048
+BinaryOp                 add__xeno_compat__1      2 1 p_re_lu_splitncnn_0 conv2d_2 add__xeno_compat__1
+PReLU                    p_re_lu_2                1 1 add__xeno_compat__1 p_re_lu_2 0=64
+Split                    splitncnn_1              1 2 p_re_lu_2 p_re_lu_2_splitncnn_0 p_re_lu_2_splitncnn_1
+Convolution              conv2d_3                 1 1 p_re_lu_2_splitncnn_1 conv2d_3 0=32 1=1 5=1 6=2048
+PReLU                    p_re_lu_3                1 1 conv2d_3 p_re_lu_3 0=32
+ConvolutionDepthWise     depthwise_conv2d_1       1 1 p_re_lu_3 depthwise_conv2d_1 0=32 1=3 4=1 5=1 6=288 7=32
+Convolution              conv2d_4                 1 1 depthwise_conv2d_1 conv2d_4 0=64 1=1 5=1 6=2048
+BinaryOp                 add_1__xeno_compat__1    2 1 p_re_lu_2_splitncnn_0 conv2d_4 add_1__xeno_compat__1
+PReLU                    p_re_lu_4                1 1 add_1__xeno_compat__1 p_re_lu_4 0=64
+Split                    splitncnn_2              1 2 p_re_lu_4 p_re_lu_4_splitncnn_0 p_re_lu_4_splitncnn_1
+Convolution              conv2d_5                 1 1 p_re_lu_4_splitncnn_1 conv2d_5 0=32 1=1 5=1 6=2048
+PReLU                    p_re_lu_5                1 1 conv2d_5 p_re_lu_5 0=32
+ConvolutionDepthWise     depthwise_conv2d_2       1 1 p_re_lu_5 depthwise_conv2d_2 0=32 1=3 4=1 5=1 6=288 7=32
+Convolution              conv2d_6                 1 1 depthwise_conv2d_2 conv2d_6 0=64 1=1 5=1 6=2048
+BinaryOp                 add_2__xeno_compat__1    2 1 p_re_lu_4_splitncnn_0 conv2d_6 add_2__xeno_compat__1
+PReLU                    p_re_lu_6                1 1 add_2__xeno_compat__1 p_re_lu_6 0=64
+Split                    splitncnn_3              1 2 p_re_lu_6 p_re_lu_6_splitncnn_0 p_re_lu_6_splitncnn_1
+Convolution              conv2d_7                 1 1 p_re_lu_6_splitncnn_1 conv2d_7 0=32 1=1 5=1 6=2048
+PReLU                    p_re_lu_7                1 1 conv2d_7 p_re_lu_7 0=32
+ConvolutionDepthWise     depthwise_conv2d_3       1 1 p_re_lu_7 depthwise_conv2d_3 0=32 1=3 4=1 5=1 6=288 7=32
+Convolution              conv2d_8                 1 1 depthwise_conv2d_3 conv2d_8 0=64 1=1 5=1 6=2048
+BinaryOp                 add_3__xeno_compat__1    2 1 p_re_lu_6_splitncnn_0 conv2d_8 add_3__xeno_compat__1
+PReLU                    p_re_lu_8                1 1 add_3__xeno_compat__1 p_re_lu_8 0=64
+Split                    splitncnn_4              1 2 p_re_lu_8 p_re_lu_8_splitncnn_0 p_re_lu_8_splitncnn_1
+Pooling                  max_pooling2d            1 1 p_re_lu_8_splitncnn_1 max_pooling2d 1=2 2=2 5=1
+Padding                  channel_padding          1 1 max_pooling2d channel_padding 8=64
+Convolution              conv2d_9                 1 1 p_re_lu_8_splitncnn_0 conv2d_9 0=64 1=2 3=2 5=1 6=16384
+PReLU                    p_re_lu_9                1 1 conv2d_9 p_re_lu_9 0=64
+ConvolutionDepthWise     depthwise_conv2d_4       1 1 p_re_lu_9 depthwise_conv2d_4 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_10                1 1 depthwise_conv2d_4 conv2d_10 0=128 1=1 5=1 6=8192
+BinaryOp                 add_4__xeno_compat__1    2 1 channel_padding conv2d_10 add_4__xeno_compat__1
+PReLU                    p_re_lu_10               1 1 add_4__xeno_compat__1 p_re_lu_10 0=128
+Split                    splitncnn_5              1 2 p_re_lu_10 p_re_lu_10_splitncnn_0 p_re_lu_10_splitncnn_1
+Convolution              conv2d_11                1 1 p_re_lu_10_splitncnn_1 conv2d_11 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_11               1 1 conv2d_11 p_re_lu_11 0=64
+ConvolutionDepthWise     depthwise_conv2d_5       1 1 p_re_lu_11 depthwise_conv2d_5 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_12                1 1 depthwise_conv2d_5 conv2d_12 0=128 1=1 5=1 6=8192
+BinaryOp                 add_5__xeno_compat__1    2 1 p_re_lu_10_splitncnn_0 conv2d_12 add_5__xeno_compat__1
+PReLU                    p_re_lu_12               1 1 add_5__xeno_compat__1 p_re_lu_12 0=128
+Split                    splitncnn_6              1 2 p_re_lu_12 p_re_lu_12_splitncnn_0 p_re_lu_12_splitncnn_1
+Convolution              conv2d_13                1 1 p_re_lu_12_splitncnn_1 conv2d_13 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_13               1 1 conv2d_13 p_re_lu_13 0=64
+ConvolutionDepthWise     depthwise_conv2d_6       1 1 p_re_lu_13 depthwise_conv2d_6 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_14                1 1 depthwise_conv2d_6 conv2d_14 0=128 1=1 5=1 6=8192
+BinaryOp                 add_6__xeno_compat__1    2 1 p_re_lu_12_splitncnn_0 conv2d_14 add_6__xeno_compat__1
+PReLU                    p_re_lu_14               1 1 add_6__xeno_compat__1 p_re_lu_14 0=128
+Split                    splitncnn_7              1 2 p_re_lu_14 p_re_lu_14_splitncnn_0 p_re_lu_14_splitncnn_1
+Convolution              conv2d_15                1 1 p_re_lu_14_splitncnn_1 conv2d_15 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_15               1 1 conv2d_15 p_re_lu_15 0=64
+ConvolutionDepthWise     depthwise_conv2d_7       1 1 p_re_lu_15 depthwise_conv2d_7 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_16                1 1 depthwise_conv2d_7 conv2d_16 0=128 1=1 5=1 6=8192
+BinaryOp                 add_7__xeno_compat__1    2 1 p_re_lu_14_splitncnn_0 conv2d_16 add_7__xeno_compat__1
+PReLU                    p_re_lu_16               1 1 add_7__xeno_compat__1 p_re_lu_16 0=128
+Split                    splitncnn_8              1 2 p_re_lu_16 p_re_lu_16_splitncnn_0 p_re_lu_16_splitncnn_1
+Convolution              conv2d_17                1 1 p_re_lu_16_splitncnn_1 conv2d_17 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_17               1 1 conv2d_17 p_re_lu_17 0=64
+ConvolutionDepthWise     depthwise_conv2d_8       1 1 p_re_lu_17 depthwise_conv2d_8 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_18                1 1 depthwise_conv2d_8 conv2d_18 0=128 1=1 5=1 6=8192
+BinaryOp                 add_8__xeno_compat__1    2 1 p_re_lu_16_splitncnn_0 conv2d_18 add_8__xeno_compat__1
+PReLU                    p_re_lu_18               1 1 add_8__xeno_compat__1 p_re_lu_18 0=128
+Split                    splitncnn_9              1 2 p_re_lu_18 p_re_lu_18_splitncnn_0 p_re_lu_18_splitncnn_1
+Pooling                  max_pooling2d_1          1 1 p_re_lu_18_splitncnn_1 max_pooling2d_1 1=2 2=2 5=1
+Convolution              conv2d_19                1 1 p_re_lu_18_splitncnn_0 conv2d_19 0=64 1=2 3=2 5=1 6=32768
+PReLU                    p_re_lu_19               1 1 conv2d_19 p_re_lu_19 0=64
+ConvolutionDepthWise     depthwise_conv2d_9       1 1 p_re_lu_19 depthwise_conv2d_9 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_20                1 1 depthwise_conv2d_9 conv2d_20 0=128 1=1 5=1 6=8192
+BinaryOp                 add_9__xeno_compat__1    2 1 max_pooling2d_1 conv2d_20 add_9__xeno_compat__1
+PReLU                    p_re_lu_20               1 1 add_9__xeno_compat__1 p_re_lu_20 0=128
+Split                    splitncnn_10             1 4 p_re_lu_20 p_re_lu_20_splitncnn_0 p_re_lu_20_splitncnn_1 p_re_lu_20_splitncnn_2 p_re_lu_20_splitncnn_3
+Convolution              conv2d_37                1 1 p_re_lu_20_splitncnn_3 conv2d_37 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_37               1 1 conv2d_37 p_re_lu_37 0=64
+ConvolutionDepthWise     depthwise_conv2d_18      1 1 p_re_lu_37 depthwise_conv2d_18 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_38                1 1 depthwise_conv2d_18 conv2d_38 0=128 1=1 5=1 6=8192
+Convolution              conv2d_21                1 1 p_re_lu_20_splitncnn_2 conv2d_21 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_21               1 1 conv2d_21 p_re_lu_21 0=64
+ConvolutionDepthWise     depthwise_conv2d_10      1 1 p_re_lu_21 depthwise_conv2d_10 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_22                1 1 depthwise_conv2d_10 conv2d_22 0=128 1=1 5=1 6=8192
+BinaryOp                 add_18__xeno_compat__1   2 1 p_re_lu_20_splitncnn_1 conv2d_38 add_18__xeno_compat__1
+PReLU                    p_re_lu_38               1 1 add_18__xeno_compat__1 p_re_lu_38 0=128
+Split                    splitncnn_11             1 2 p_re_lu_38 p_re_lu_38_splitncnn_0 p_re_lu_38_splitncnn_1
+Convolution              conv2d_39                1 1 p_re_lu_38_splitncnn_1 conv2d_39 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_39               1 1 conv2d_39 p_re_lu_39 0=64
+ConvolutionDepthWise     depthwise_conv2d_19      1 1 p_re_lu_39 depthwise_conv2d_19 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_40                1 1 depthwise_conv2d_19 conv2d_40 0=128 1=1 5=1 6=8192
+BinaryOp                 add_19__xeno_compat__1   2 1 p_re_lu_38_splitncnn_0 conv2d_40 add_19__xeno_compat__1
+PReLU                    p_re_lu_40               1 1 add_19__xeno_compat__1 p_re_lu_40 0=128
+Split                    splitncnn_12             1 2 p_re_lu_40 p_re_lu_40_splitncnn_0 p_re_lu_40_splitncnn_1
+Pooling                  max_pooling2d_4          1 1 p_re_lu_40_splitncnn_1 max_pooling2d_4 1=2 2=2 5=1
+Convolution              conv2d_41                1 1 p_re_lu_40_splitncnn_0 conv2d_41 0=64 1=2 3=2 5=1 6=32768
+PReLU                    p_re_lu_41               1 1 conv2d_41 p_re_lu_41 0=64
+ConvolutionDepthWise     depthwise_conv2d_20      1 1 p_re_lu_41 depthwise_conv2d_20 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_42                1 1 depthwise_conv2d_20 conv2d_42 0=128 1=1 5=1 6=8192
+BinaryOp                 add_20__xeno_compat__1   2 1 max_pooling2d_4 conv2d_42 add_20__xeno_compat__1
+PReLU                    p_re_lu_42               1 1 add_20__xeno_compat__1 p_re_lu_42 0=128
+Split                    splitncnn_13             1 2 p_re_lu_42 p_re_lu_42_splitncnn_0 p_re_lu_42_splitncnn_1
+Convolution              conv2d_43                1 1 p_re_lu_42_splitncnn_1 conv2d_43 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_43               1 1 conv2d_43 p_re_lu_43 0=64
+ConvolutionDepthWise     depthwise_conv2d_21      1 1 p_re_lu_43 depthwise_conv2d_21 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_44                1 1 depthwise_conv2d_21 conv2d_44 0=128 1=1 5=1 6=8192
+BinaryOp                 add_21__xeno_compat__1   2 1 p_re_lu_42_splitncnn_0 conv2d_44 add_21__xeno_compat__1
+PReLU                    p_re_lu_44               1 1 add_21__xeno_compat__1 p_re_lu_44 0=128
+Split                    splitncnn_14             1 2 p_re_lu_44 p_re_lu_44_splitncnn_0 p_re_lu_44_splitncnn_1
+Convolution              conv2d_45                1 1 p_re_lu_44_splitncnn_1 conv2d_45 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_45               1 1 conv2d_45 p_re_lu_45 0=64
+ConvolutionDepthWise     depthwise_conv2d_22      1 1 p_re_lu_45 depthwise_conv2d_22 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_46                1 1 depthwise_conv2d_22 conv2d_46 0=128 1=1 5=1 6=8192
+BinaryOp                 add_22__xeno_compat__1   2 1 p_re_lu_44_splitncnn_0 conv2d_46 add_22__xeno_compat__1
+PReLU                    p_re_lu_46               1 1 add_22__xeno_compat__1 p_re_lu_46 0=128
+Split                    splitncnn_15             1 2 p_re_lu_46 p_re_lu_46_splitncnn_0 p_re_lu_46_splitncnn_1
+Pooling                  max_pooling2d_5          1 1 p_re_lu_46_splitncnn_1 max_pooling2d_5 1=2 2=2 5=1
+Convolution              conv2d_47                1 1 p_re_lu_46_splitncnn_0 conv2d_47 0=64 1=2 3=2 5=1 6=32768
+PReLU                    p_re_lu_47               1 1 conv2d_47 p_re_lu_47 0=64
+ConvolutionDepthWise     depthwise_conv2d_23      1 1 p_re_lu_47 depthwise_conv2d_23 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_48                1 1 depthwise_conv2d_23 conv2d_48 0=128 1=1 5=1 6=8192
+BinaryOp                 add_23__xeno_compat__1   2 1 max_pooling2d_5 conv2d_48 add_23__xeno_compat__1
+PReLU                    p_re_lu_48               1 1 add_23__xeno_compat__1 p_re_lu_48 0=128
+Split                    splitncnn_16             1 2 p_re_lu_48 p_re_lu_48_splitncnn_0 p_re_lu_48_splitncnn_1
+Convolution              conv2d_49                1 1 p_re_lu_48_splitncnn_1 conv2d_49 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_49               1 1 conv2d_49 p_re_lu_49 0=64
+ConvolutionDepthWise     depthwise_conv2d_24      1 1 p_re_lu_49 depthwise_conv2d_24 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_50                1 1 depthwise_conv2d_24 conv2d_50 0=128 1=1 5=1 6=8192
+BinaryOp                 add_24__xeno_compat__1   2 1 p_re_lu_48_splitncnn_0 conv2d_50 add_24__xeno_compat__1
+PReLU                    p_re_lu_50               1 1 add_24__xeno_compat__1 p_re_lu_50 0=128
+Split                    splitncnn_17             1 2 p_re_lu_50 p_re_lu_50_splitncnn_0 p_re_lu_50_splitncnn_1
+Convolution              conv2d_51                1 1 p_re_lu_50_splitncnn_1 conv2d_51 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_51               1 1 conv2d_51 p_re_lu_51 0=64
+ConvolutionDepthWise     depthwise_conv2d_25      1 1 p_re_lu_51 depthwise_conv2d_25 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_52                1 1 depthwise_conv2d_25 conv2d_52 0=128 1=1 5=1 6=8192
+BinaryOp                 add_25__xeno_compat__1   2 1 p_re_lu_50_splitncnn_0 conv2d_52 add_25__xeno_compat__1
+PReLU                    p_re_lu_52               1 1 add_25__xeno_compat__1 p_re_lu_52 0=128
+Convolution              conv_iris                1 1 p_re_lu_52 conv_iris 0=15 1=2 5=1 6=7680
+Reshape                  output_iris              1 1 conv_iris output_iris 0=-1
+BinaryOp                 add_10__xeno_compat__1   2 1 p_re_lu_20_splitncnn_0 conv2d_22 add_10__xeno_compat__1
+PReLU                    p_re_lu_22               1 1 add_10__xeno_compat__1 p_re_lu_22 0=128
+Split                    splitncnn_18             1 2 p_re_lu_22 p_re_lu_22_splitncnn_0 p_re_lu_22_splitncnn_1
+Convolution              conv2d_23                1 1 p_re_lu_22_splitncnn_1 conv2d_23 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_23               1 1 conv2d_23 p_re_lu_23 0=64
+ConvolutionDepthWise     depthwise_conv2d_11      1 1 p_re_lu_23 depthwise_conv2d_11 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_24                1 1 depthwise_conv2d_11 conv2d_24 0=128 1=1 5=1 6=8192
+BinaryOp                 add_11__xeno_compat__1   2 1 p_re_lu_22_splitncnn_0 conv2d_24 add_11__xeno_compat__1
+PReLU                    p_re_lu_24               1 1 add_11__xeno_compat__1 p_re_lu_24 0=128
+Split                    splitncnn_19             1 2 p_re_lu_24 p_re_lu_24_splitncnn_0 p_re_lu_24_splitncnn_1
+Pooling                  max_pooling2d_2          1 1 p_re_lu_24_splitncnn_1 max_pooling2d_2 1=2 2=2 5=1
+Convolution              conv2d_25                1 1 p_re_lu_24_splitncnn_0 conv2d_25 0=64 1=2 3=2 5=1 6=32768
+PReLU                    p_re_lu_25               1 1 conv2d_25 p_re_lu_25 0=64
+ConvolutionDepthWise     depthwise_conv2d_12      1 1 p_re_lu_25 depthwise_conv2d_12 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_26                1 1 depthwise_conv2d_12 conv2d_26 0=128 1=1 5=1 6=8192
+BinaryOp                 add_12__xeno_compat__1   2 1 max_pooling2d_2 conv2d_26 add_12__xeno_compat__1
+PReLU                    p_re_lu_26               1 1 add_12__xeno_compat__1 p_re_lu_26 0=128
+Split                    splitncnn_20             1 2 p_re_lu_26 p_re_lu_26_splitncnn_0 p_re_lu_26_splitncnn_1
+Convolution              conv2d_27                1 1 p_re_lu_26_splitncnn_1 conv2d_27 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_27               1 1 conv2d_27 p_re_lu_27 0=64
+ConvolutionDepthWise     depthwise_conv2d_13      1 1 p_re_lu_27 depthwise_conv2d_13 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_28                1 1 depthwise_conv2d_13 conv2d_28 0=128 1=1 5=1 6=8192
+BinaryOp                 add_13__xeno_compat__1   2 1 p_re_lu_26_splitncnn_0 conv2d_28 add_13__xeno_compat__1
+PReLU                    p_re_lu_28               1 1 add_13__xeno_compat__1 p_re_lu_28 0=128
+Split                    splitncnn_21             1 2 p_re_lu_28 p_re_lu_28_splitncnn_0 p_re_lu_28_splitncnn_1
+Convolution              conv2d_29                1 1 p_re_lu_28_splitncnn_1 conv2d_29 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_29               1 1 conv2d_29 p_re_lu_29 0=64
+ConvolutionDepthWise     depthwise_conv2d_14      1 1 p_re_lu_29 depthwise_conv2d_14 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_30                1 1 depthwise_conv2d_14 conv2d_30 0=128 1=1 5=1 6=8192
+BinaryOp                 add_14__xeno_compat__1   2 1 p_re_lu_28_splitncnn_0 conv2d_30 add_14__xeno_compat__1
+PReLU                    p_re_lu_30               1 1 add_14__xeno_compat__1 p_re_lu_30 0=128
+Split                    splitncnn_22             1 2 p_re_lu_30 p_re_lu_30_splitncnn_0 p_re_lu_30_splitncnn_1
+Pooling                  max_pooling2d_3          1 1 p_re_lu_30_splitncnn_1 max_pooling2d_3 1=2 2=2 5=1
+Convolution              conv2d_31                1 1 p_re_lu_30_splitncnn_0 conv2d_31 0=64 1=2 3=2 5=1 6=32768
+PReLU                    p_re_lu_31               1 1 conv2d_31 p_re_lu_31 0=64
+ConvolutionDepthWise     depthwise_conv2d_15      1 1 p_re_lu_31 depthwise_conv2d_15 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_32                1 1 depthwise_conv2d_15 conv2d_32 0=128 1=1 5=1 6=8192
+BinaryOp                 add_15__xeno_compat__1   2 1 max_pooling2d_3 conv2d_32 add_15__xeno_compat__1
+PReLU                    p_re_lu_32               1 1 add_15__xeno_compat__1 p_re_lu_32 0=128
+Split                    splitncnn_23             1 2 p_re_lu_32 p_re_lu_32_splitncnn_0 p_re_lu_32_splitncnn_1
+Convolution              conv2d_33                1 1 p_re_lu_32_splitncnn_1 conv2d_33 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_33               1 1 conv2d_33 p_re_lu_33 0=64
+ConvolutionDepthWise     depthwise_conv2d_16      1 1 p_re_lu_33 depthwise_conv2d_16 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_34                1 1 depthwise_conv2d_16 conv2d_34 0=128 1=1 5=1 6=8192
+BinaryOp                 add_16__xeno_compat__1   2 1 p_re_lu_32_splitncnn_0 conv2d_34 add_16__xeno_compat__1
+PReLU                    p_re_lu_34               1 1 add_16__xeno_compat__1 p_re_lu_34 0=128
+Split                    splitncnn_24             1 2 p_re_lu_34 p_re_lu_34_splitncnn_0 p_re_lu_34_splitncnn_1
+Convolution              conv2d_35                1 1 p_re_lu_34_splitncnn_1 conv2d_35 0=64 1=1 5=1 6=8192
+PReLU                    p_re_lu_35               1 1 conv2d_35 p_re_lu_35 0=64
+ConvolutionDepthWise     depthwise_conv2d_17      1 1 p_re_lu_35 depthwise_conv2d_17 0=64 1=3 4=1 5=1 6=576 7=64
+Convolution              conv2d_36                1 1 depthwise_conv2d_17 conv2d_36 0=128 1=1 5=1 6=8192
+BinaryOp                 add_17__xeno_compat__1   2 1 p_re_lu_34_splitncnn_0 conv2d_36 add_17__xeno_compat__1
+PReLU                    p_re_lu_36               1 1 add_17__xeno_compat__1 p_re_lu_36 0=128
+Convolution              conv_eyes_contours_and_brows 1 1 p_re_lu_36 conv_eyes_contours_and_brows 0=213 1=2 5=1 6=109056
+Reshape                  output_eyes_contours_and_brows 1 1 conv_eyes_contours_and_brows output_eyes_contours_and_brows 0=-1
